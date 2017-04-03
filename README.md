@@ -11,20 +11,20 @@ PinTourist is a project of 3 Computer Engineering students of La Sapienza Univer
 
 ## Developed by
 * Federico Bacci
-  -[Linkedin](https://www.linkedin.com/in/federico-bacci/)
-  -[Facebook](https://www.facebook.com/fedebyes)
-  -[GitHub](https://www.github.com/fedebyes)
+  - [Linkedin](https://www.linkedin.com/in/federico-bacci/)
+  - [Facebook](https://www.facebook.com/fedebyes)
+  - [GitHub](https://www.github.com/fedebyes)
 
 * Louis Milia
-  -[Linkedin]()
-  -[Facebook]()
-  -[GitHub]()
+  - [Linkedin]()
+  - [Facebook]()
+  - [GitHub]()
 
 
 * Mudu Sugal Omar
-  -[Linkedin]()
-  -[Facebook]()
-  -[GitHub]()
+  - [Linkedin]()
+  - [Facebook]()
+  - [GitHub]()
 
 
 
