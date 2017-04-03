@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "946083213522",
+    "firebase_url": "https://pintourist-163012.firebaseio.com",
+    "project_id": "pintourist-163012",
+    "storage_bucket": "pintourist-163012.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946083213522:android:c53fbb945dd3cc97",
+        "android_client_info": {
+          "package_name": "com.pintourist.pintourist.pintourist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "946083213522-2vik4s2jnhansmesgtd0n29l30diaa61.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg3zRnPanMI1bVPA9Wm8RuiTVXPh3cA88"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
