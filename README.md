@@ -33,9 +33,9 @@ Imagine a smart phone application that can
 
 
 * **Mudu Sugal Omar**
-  - [Linkedin]()
-  - [Facebook]()
-  - [GitHub]()
+  - [Linkedin](https://www.linkedin.com/in/mohamud-sugal-omar-8418409a/)
+  - [Facebook](https://www.facebook.com/sugal.mudu)
+  - [GitHub](https://github.com/mudu93)
 
 
 
