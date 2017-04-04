@@ -19,13 +19,30 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+
+    maven {
+        repositories {
+            url 'https://oss.sonatype.org/content/repositories/releases/'
+        }
+    }
+
+    mavenCentral()
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile 'me.zhanghai.android.materialprogressbar:library:1.1.5'
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:design:25.1.0'
+    //compile 'com.github.ViksaaSkool:AwesomeSplash:v1.0.0'
     testCompile 'junit:junit:4.12'
     apply plugin: 'com.google.gms.google-services'
+
 }
