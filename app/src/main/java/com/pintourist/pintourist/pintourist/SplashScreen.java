@@ -2,6 +2,7 @@ package com.pintourist.pintourist.pintourist;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +13,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class SplashScreen extends AppCompatActivity {
-    public static final int SPLASH_ACTIVITY_TIME = 4000;
+    public static final int SPLASH_ACTIVITY_TIME = 5000;
     private static final String TAG = "SplashActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
