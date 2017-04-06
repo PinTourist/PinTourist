@@ -1,5 +1,6 @@
 package com.pintourist.pintourist.pintourist;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,17 +22,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, MapsFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener, MapsFragment.OnFragmentInteractionListener, PinFragment.OnFragmentInteractionListener {
 
-    //BottomView
-    private BottomNavigationView mBottomNav;
-    private int mSelectedItem;
-    private static final String SELECTED_ITEM = "arg_selected_item";
+
+    private String TAG = " MainActiviry";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +37,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        final FragmentManager fragmentManager = getSupportFragmentManager();
 
         /*
         //BottomView
@@ -60,20 +61,58 @@ public class MainActivity extends AppCompatActivity
         }
         selectFragment(selectedItem);
         */
+
+        //Refer to https://github.com/aurelhubert/ahbottomnavigation
+
         AHBottomNavigation bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
 
 // Create items
         AHBottomNavigationItem item1 = new AHBottomNavigationItem("Ciao", R.drawable.ic_menu_share, R.color.colorPrimary);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem("Ciao", R.drawable.ic_menu_share,  R.color.colorPrimary);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem("Ciao", R.drawable.ic_menu_share,  R.color.colorPrimary);
 
-// Add items
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem("Ciao", R.drawable.ic_menu_share, R.color.colorPrimary);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem("Ciao", R.drawable.ic_menu_share, R.color.colorPrimary);
+
+
+        // Disable the translation inside the CoordinatorLayout
+        //bottomNavigation.setBehaviorTranslationEnabled(false);
+        // Change colors
+        bottomNavigation.setAccentColor(this.getResources().getColor(R.color.colorPrimary));
+        bottomNavigation.setInactiveColor(Color.parseColor("#747474"));
+        // Set background color
+        bottomNavigation.setDefaultBackgroundColor(this.getResources().getColor(R.color.white));
+        //bottomNavigation.setTranslucentNavigationEnabled(true);
+        // Use colored navigation with circle reveal effect
+        //bottomNavigation.setColored(true);
+        //bottomNavigation.setColored(true);
+        // Add items
         bottomNavigation.addItem(item1);
         bottomNavigation.addItem(item2);
         bottomNavigation.addItem(item3);
+        bottomNavigation.setCurrentItem(0);
+
+        // Set listeners
+        bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
+            @Override
+            public boolean onTabSelected(int position, boolean wasSelected) {
+                Fragment frag = null;
+                Log.d(TAG, "Selected " +
+                        position);
+                switch (position) {
+                    case 0:
+                        Fragment fragment= new MapsFragment();
+
+
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.container, fragment)
+                                .commit();
 
 
 
+
+                }
+                return true;
+            }
+        });
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -81,9 +120,11 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                       // .setAction("Action", null).show();
+                // .setAction("Action", null).show();
             }
         });
+        // Enable the translation of the FloatingActionButton
+        bottomNavigation.manageFloatingActionButtonBehavior(fab);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -95,30 +136,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        /*
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)
-
-                findViewById(R.id.bottom_navigation);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.action_favorites:
-
-                                break;
-                            case R.id.action_schedules:
-
-                                break;
-                            case R.id.action_music:
-
-                                break;
-                        }
-                        return false;
-                    }
-                });
-        */
     }
 
     @Override
@@ -178,7 +195,12 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void selectFragment(MenuItem item) {
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    /*private void selectFragment(MenuItem item) {
         MapsFragment frag = null;
         // init corresponding fragment
         switch (item.getItemId()) {
@@ -194,7 +216,7 @@ public class MainActivity extends AppCompatActivity
         mSelectedItem = item.getItemId();
 
         // uncheck the other items.
-        for (int i = 0; i< mBottomNav.getMenu().size(); i++) {
+        for (int i = 0; i < mBottomNav.getMenu().size(); i++) {
             MenuItem menuItem = mBottomNav.getMenu().getItem(i);
             menuItem.setChecked(menuItem.getItemId() == item.getItemId());
         }
@@ -204,12 +226,8 @@ public class MainActivity extends AppCompatActivity
         if (frag != null) {
             /*FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.add(R.id.container, frag, "");
-            ft.commit();*/
+            ft.commit();
         }
-    }
+    }*/
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 }

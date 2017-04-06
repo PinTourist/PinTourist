@@ -4,28 +4,20 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-
-import static android.content.ContentValues.TAG;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MapsFragment.OnFragmentInteractionListener} interface
+ * {@link PinFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link MapsFragment#newInstance} factory method to
+ * Use the {@link PinFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MapsFragment extends SupportMapFragment {
+public class PinFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -37,7 +29,7 @@ public class MapsFragment extends SupportMapFragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public MapsFragment() {
+    public PinFragment() {
         // Required empty public constructor
     }
 
@@ -47,11 +39,11 @@ public class MapsFragment extends SupportMapFragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MapsFragment.
+     * @return A new instance of fragment PinFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MapsFragment newInstance(String param1, String param2) {
-        MapsFragment fragment = new MapsFragment();
+    public static PinFragment newInstance(String param1, String param2) {
+        PinFragment fragment = new PinFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -66,24 +58,13 @@ public class MapsFragment extends SupportMapFragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap googleMap) {
-                Log.d(TAG, "Map Ready");
-            }
-        });
-        /*SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);*/
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_maps, container, false);
+        return inflater.inflate(R.layout.fragment_pin, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -109,8 +90,6 @@ public class MapsFragment extends SupportMapFragment {
         super.onDetach();
         mListener = null;
     }
-
-
 
     /**
      * This interface must be implemented by activities that contain this
