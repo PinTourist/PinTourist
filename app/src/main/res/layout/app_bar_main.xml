@@ -36,8 +36,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
+        app:itemIconTint="@color/gray"
+
+        app:itemTextColor="@color/gray"
         app:menu="@menu/bottom_navigation_main" />
 
     <android.support.v7.widget.Toolbar

@@ -10,7 +10,6 @@
     <meta-data
         android:name="com.google.android.gms.version"
         android:value="@integer/google_play_services_version" />
-
     <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="@string/google_maps_key" />
@@ -43,11 +42,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pintourist.pintourist.pintourist.SplashScreen" />
         </activity>
-        <activity
-            android:name=".FullscreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_fullscreen"
-            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>
