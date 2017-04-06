@@ -7,6 +7,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -18,8 +19,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+
+
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, MapsFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, MapsFragment.OnFragmentInteractionListener{
 
     //BottomView
     private BottomNavigationView mBottomNav;
@@ -33,6 +39,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /*
         //BottomView
         mBottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -52,7 +59,18 @@ public class MainActivity extends AppCompatActivity
             selectedItem = mBottomNav.getMenu().getItem(0);
         }
         selectFragment(selectedItem);
+        */
+        AHBottomNavigation bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
 
+// Create items
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem("Ciao", R.drawable.ic_menu_share, R.color.colorPrimary);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem("Ciao", R.drawable.ic_menu_share,  R.color.colorPrimary);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem("Ciao", R.drawable.ic_menu_share,  R.color.colorPrimary);
+
+// Add items
+        bottomNavigation.addItem(item1);
+        bottomNavigation.addItem(item2);
+        bottomNavigation.addItem(item3);
 
 
 
@@ -161,7 +179,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void selectFragment(MenuItem item) {
-        Fragment frag = null;
+        MapsFragment frag = null;
         // init corresponding fragment
         switch (item.getItemId()) {
 
@@ -184,9 +202,9 @@ public class MainActivity extends AppCompatActivity
         //updateToolbarText(item.getTitle());
 
         if (frag != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.container, frag, frag.getTag());
-            ft.commit();
+            /*FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.add(R.id.container, frag, "");
+            ft.commit();*/
         }
     }
 
