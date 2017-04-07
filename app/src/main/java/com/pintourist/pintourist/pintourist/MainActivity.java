@@ -37,9 +37,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        final Fragment fragment= new MapsFragment();
         final FragmentManager fragmentManager = getSupportFragmentManager();
-
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
         /*
         //BottomView
         mBottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -99,7 +101,7 @@ public class MainActivity extends AppCompatActivity
                         position);
                 switch (position) {
                     case 0:
-                        Fragment fragment= new MapsFragment();
+
 
 
                         fragmentManager.beginTransaction()

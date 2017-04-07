@@ -20,6 +20,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -41,7 +42,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     private static final String ARG_PARAM2 = "param2";
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 122;
     
-    private String[] PERMISSIONS = new String[]{ACCESS_FINE_LOCATION,
+    private String[] PERMISSIONS = new String[]{ ACCESS_FINE_LOCATION,
            ACCESS_COARSE_LOCATION};
 
     // TODO: Rename and change types of parameters
@@ -116,6 +117,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap=googleMap;
+        permissionRequest();
         setUpMap(googleMap);
         Log.d(TAG,"Maps Ready");
 
@@ -127,16 +129,21 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     private void setUpMap(GoogleMap googleMap) {
 
         googleMap.getUiSettings().setMapToolbarEnabled(true);
-        googleMap.getUiSettings().setMyLocationButtonEnabled(false);
+        googleMap.getUiSettings().setMyLocationButtonEnabled(true);
 
         //permissionRequest();
         LatLng ROMA = new LatLng(41.9000, 12.5000);
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(ROMA)      // Sets the center of the map to mi position
-                .zoom(5)                   // Sets the zoom
+                .zoom(10)                   // Sets the zoom
                 .bearing(0)                // Sets the orientation of the camera to east
                 .build();                   // Creates a CameraPosition from the builder
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+        LatLng Marker1 = new LatLng(41.9000, 12.5000);
+        googleMap.addMarker(new MarkerOptions().position(Marker1)
+                .title("Marker1"));
+
 
 
     }
