@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:946083213522:android:c53fbb945dd3cc97",
         "android_client_info": {
-          "package_name": "com.pintourist.pintourist.pintourist"
+          "package_name": "com.pinturist.pinturist"
         }
       },
       "oauth_client": [
@@ -31,6 +31,50 @@
         "appinvite_service": {
           "status": 1,
           "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946083213522:android:5acf29c58b6f276a",
+        "android_client_info": {
+          "package_name": "com.pintourist.pintourist.pintourist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "946083213522-r2rl7hk6ru0ijj5fbd2mdb3l4dg36se3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pintourist.pintourist.pintourist",
+            "certificate_hash": "4ef2dc5f607545515a3926a3a6360affde5a370d"
+          }
+        },
+        {
+          "client_id": "946083213522-2vik4s2jnhansmesgtd0n29l30diaa61.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg3zRnPanMI1bVPA9Wm8RuiTVXPh3cA88"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "946083213522-2vik4s2jnhansmesgtd0n29l30diaa61.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

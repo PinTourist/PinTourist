@@ -27,15 +27,15 @@ Imagine a smart phone application that can
   - [GitHub](https://www.github.com/fedebyes)
 
 * **Louis Milia**
-  - [Linkedin]()
-  - [Facebook]()
-  - [GitHub]()
+  - [Linkedin](https://www.linkedin.com/in/louis-milia)
+  - [Facebook](https://www.facebook.com/louis.milia)
+  - [GitHub](https://github.com/AilimiSoul)
 
 
 * **Mudu Sugal Omar**
-  - [Linkedin]()
-  - [Facebook]()
-  - [GitHub]()
+  - [Linkedin](https://www.linkedin.com/in/mohamud-sugal-omar-8418409a/)
+  - [Facebook](https://www.facebook.com/sugal.mudu)
+  - [GitHub](https://github.com/mudu93)
 
 
 
