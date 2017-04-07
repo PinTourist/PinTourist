@@ -46,7 +46,7 @@ dependencies {
 
     compile 'com.aurelhubert:ahbottomnavigation:2.0.6'
     compile 'com.google.android.gms:play-services-maps:10.2.1'
-    compile 'me.zhanghai.android.materialprogressbar:library:1.1.5'
+    //compile 'me.zhanghai.android.materialprogressbar:library:1.1.5'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
