@@ -21,6 +21,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.content.ContentValues.TAG;
 
 
@@ -37,9 +39,10 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 122;
     
-    private String[] PERMISSIONS = new String[]{ Manifest.permission.,
-            Manifest.permission.ACCESS_COARSE_LOCATION};
+    private String[] PERMISSIONS = new String[]{ACCESS_FINE_LOCATION,
+           ACCESS_COARSE_LOCATION};
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -187,7 +190,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             //Log.d(TAG, "sdk<23");
         } else {
             int permissionCheck = ContextCompat.checkSelfPermission(getActivity(),
-                    Manifest.permission.ACCESS_FINE_LOCATION);
+                 ACCESS_FINE_LOCATION);
             if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
                 //Log.d(TAG, "permission granted on check");
                 if(googleMap!=null)googleMap.setMyLocationEnabled(true);
