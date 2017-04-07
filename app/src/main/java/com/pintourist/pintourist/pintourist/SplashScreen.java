@@ -12,7 +12,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class SplashScreen extends AppCompatActivity {
-    public static final int SPLASH_ACTIVITY_TIME = 4000;
+    public static final int SPLASH_ACTIVITY_TIME = 400;
     private static final String TAG = "SplashActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class SplashScreen extends AppCompatActivity {
                 // Start the next activity
 
                 Intent mainIntent = new Intent().setClass(
-                        SplashScreen.this, MainActivity.class);
+                        SplashScreen.this, LoginActivity.class);
                 mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 //mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(mainIntent);
