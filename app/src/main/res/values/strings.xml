@@ -31,6 +31,9 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
+    //So the application can refer back the the facebook id
+    <string name="facebook_application_id" translateable="false">1850410385201480</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
