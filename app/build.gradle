@@ -50,6 +50,9 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
+    //Firebase Depenendencies
+    compile 'com.firebaseui:firebase-ui-auth:1.2.0'
+    //Firebase Authentication
     compile 'com.google.firebase:firebase-auth:10.2.1'
     testCompile 'junit:junit:4.12'
 }
