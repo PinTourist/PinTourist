@@ -27,6 +27,10 @@ repositories {
     maven {
         url "https://jitpack.io"
     }
+    jcenter()
+    maven {
+        url 'https://maven.fabric.io/public'
+    }
 
     maven {
         repositories {
@@ -53,7 +57,7 @@ dependencies {
     //Firebase Depenendencies
     compile 'com.firebaseui:firebase-ui-auth:1.2.0'
     //Firebase Authentication
-    compile 'com.google.firebase:firebase-auth:10.2.1'
+    compile 'com.google.firebase:firebase-auth:10.2.0'
     testCompile 'junit:junit:4.12'
 }
 
