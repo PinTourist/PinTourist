@@ -14,7 +14,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class SplashScreen extends AppCompatActivity {
-    public static final int SPLASH_ACTIVITY_TIME = 100;//4000 Optimal
+    public static final int SPLASH_ACTIVITY_TIME = 500;//4000 Optimal
     private static final String TAG = "SplashActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {

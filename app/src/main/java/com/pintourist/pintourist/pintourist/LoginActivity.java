@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(auth.getCurrentUser() !=null){
             //user is already signed in
             Log.d("AUTH", auth.getCurrentUser().getEmail());
+            run();
         }else{
             startActivityForResult(AuthUI.getInstance()
                     .createSignInIntentBuilder()
@@ -72,6 +73,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if(requestCode == RESULT_OK){
                 //user logged in
                 Log.d("AUTH", auth.getCurrentUser().getEmail());
+                run();
             }
             else{
                 //user not authenticated
@@ -92,6 +94,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     });
         }
+    }
+
+    public void run() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
 
