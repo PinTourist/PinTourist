@@ -27,10 +27,6 @@ repositories {
     maven {
         url "https://jitpack.io"
     }
-    jcenter()
-    maven {
-        url 'https://maven.fabric.io/public'
-    }
 
     maven {
         repositories {
@@ -50,17 +46,16 @@ dependencies {
 
     compile 'com.aurelhubert:ahbottomnavigation:2.0.6'
     compile 'com.google.android.gms:play-services-maps:10.2.1'
+    compile 'com.google.android.gms:play-services-auth:10.2.1'
     compile 'me.zhanghai.android.materialprogressbar:library:1.1.5'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
     //Firebase Depenendencies
     compile 'com.firebaseui:firebase-ui-auth:1.2.0'
-    //Firebase Authentication
-    compile 'com.google.firebase:firebase-auth:10.2.0'
+    compile 'com.google.firebase:firebase-auth:10.2.1'
+    compile 'com.google.firebase:firebase-core:10.2.1'
     testCompile 'junit:junit:4.12'
 }
-
-
 
 apply plugin: 'com.google.gms.google-services'
