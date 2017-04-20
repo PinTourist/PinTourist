@@ -32,6 +32,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -39,7 +41,7 @@ import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private static final int RC_SIGN_IN = 0;
     private FirebaseAuth auth;
     @Override
@@ -59,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                             AuthUI.GOOGLE_PROVIDER)
                     .build(),RC_SIGN_IN);
         }
+        findViewById(R.id.log_out_button).setOnClickListener(this);
 
     }
 
@@ -77,5 +80,18 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.log_out_button){
+            AuthUI.getInstance().signOut(this)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Log.d("AUTH", "USER LOGGED OUT");
+                            finish();
+                        }
+                    });
+        }
+    }
 }
 
