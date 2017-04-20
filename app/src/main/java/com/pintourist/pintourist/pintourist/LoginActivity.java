@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         if(auth.getCurrentUser() !=null){
             //user is already signed in
+            Log.d("AUTH", auth.getCurrentUser().getEmail());
         }else{
             startActivityForResult(AuthUI.getInstance()
                     .createSignInIntentBuilder()
@@ -67,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
         if(requestCode == RC_SIGN_IN){
             if(requestCode == RESULT_OK){
                 //user logged in
-                Log.d("AUTH", auth.getCurrentUser.getEmail());
+                Log.d("AUTH", auth.getCurrentUser().getEmail());
             }
             else{
                 //user not authenticated
