@@ -16,7 +16,7 @@ Imagine a smart phone application that can
     
 
 
-![PinTourist](https://lh4.googleusercontent.com/F7IERYtES8_GSt-P-svrCm86rWHyUXrVjgst7F3vGk9ANkp1TmXoUXTXFqO-z9Z4XScX0vIxlgnFzuM=w1358-h617-rw)
+![PinTourist](https://github.com/PinTourist/PinTourist/blob/master/images/logo.png?raw=true)
 
 
 
