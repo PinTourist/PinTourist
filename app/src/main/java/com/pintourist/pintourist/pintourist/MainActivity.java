@@ -24,6 +24,8 @@ import android.view.MenuItem;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MapsFragment.OnFragmentInteractionListener, PinFragment.OnFragmentInteractionListener {
@@ -42,6 +44,17 @@ public class MainActivity extends AppCompatActivity
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
+
+        //Firebasecode
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //DatabaseReference myRef = database.getReference("message");
+
+        //myRef.setValue("Hello, World!");
+
+
+
+
         /*
         //BottomView
         mBottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -88,8 +101,8 @@ public class MainActivity extends AppCompatActivity
         //bottomNavigation.setColored(true);
         // Add items
         bottomNavigation.addItem(item1);
-        bottomNavigation.addItem(item2);
-        bottomNavigation.addItem(item3);
+        //bottomNavigation.addItem(item2);
+        //bottomNavigation.addItem(item3);
         bottomNavigation.setCurrentItem(0);
 
         // Set listeners
@@ -114,7 +127,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 return true;
             }
-        });
+        }); 
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

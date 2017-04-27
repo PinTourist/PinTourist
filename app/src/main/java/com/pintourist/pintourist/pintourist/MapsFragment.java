@@ -20,7 +20,18 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -35,13 +46,14 @@ import static android.content.ContentValues.TAG;
  * Use the {@link MapsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback {
+public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback,GoogleMap.OnInfoWindowClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 122;
-    
+    private DatabaseReference database;
+    private String TAG= "MapsFragment";
     private String[] PERMISSIONS = new String[]{ ACCESS_FINE_LOCATION,
            ACCESS_COARSE_LOCATION};
 
@@ -56,14 +68,6 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MapsFragment.
-     */
     // TODO: Rename and change types and number of parameters
     public static MapsFragment newInstance(String param1, String param2) {
         MapsFragment fragment = new MapsFragment();
@@ -90,7 +94,6 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
 
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -131,6 +134,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         googleMap.getUiSettings().setMapToolbarEnabled(true);
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
 
+
         //permissionRequest();
         LatLng ROMA = new LatLng(41.9000, 12.5000);
         CameraPosition cameraPosition = new CameraPosition.Builder()
@@ -141,26 +145,76 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
         LatLng Marker1 = new LatLng(41.9000, 12.5000);
+        LatLng Marker2 = new LatLng(41.8000, 12.5000);
+        LatLng Marker3 = new LatLng(41.9000, 12.4000);
         googleMap.addMarker(new MarkerOptions().position(Marker1)
-                .title("Marker1"));
+                .title("Marker1")).showInfoWindow();
+        googleMap.addMarker(new MarkerOptions().position(Marker2)
+                .title("Marker2")).showInfoWindow();
+        googleMap.addMarker(new MarkerOptions().position(Marker2)
+                .title("Marker2")).showInfoWindow();
+        //Firebasecode
+
+         database = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference ref = database.child("pin").child("pins");
+        Query query1= ref.equalTo("1");
+
+        query1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
+                    Object o = singleSnapshot.getValue(Objects.class);
+                    Log.d(TAG, o.toString());
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled", databaseError.toException());
+            }
+        });
+
+
+        /*
+         final List<Pin> pins=new ArrayList<Pin>();
+        Log.d(TAG, String.valueOf(pins.size()));
+         Query query= ref;
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d(TAG, String.valueOf(pins.size()));
+                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
+                    pins.add(singleSnapshot.getValue(Pin.class));
+                    Log.d(TAG,"new Pin added");
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled", databaseError.toException());
+            }
+        });*/
 
 
 
     }
 
+    @Override
+    public void onInfoWindowClick(Marker marker) {
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    }
+
+    /*@Override
+    public void onInfoWindowClick(Marker marker) {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.content_frame, fragment);
+        fragmentTransaction.addToBackStack(null);
+    }*/
+
+
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
+
         void onFragmentInteraction(Uri uri);
     }
 
