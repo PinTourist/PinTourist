@@ -1,6 +1,7 @@
 package com.pintourist.pintourist.pintourist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -56,6 +58,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     private String TAG= "MapsFragment";
     private String[] PERMISSIONS = new String[]{ ACCESS_FINE_LOCATION,
            ACCESS_COARSE_LOCATION};
+    private View mapView ;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -86,6 +89,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         getMapAsync(this);
+
 
 
     }
@@ -122,6 +126,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         this.googleMap=googleMap;
         permissionRequest();
         setUpMap(googleMap);
+
         Log.d(TAG,"Maps Ready");
 
 
@@ -131,9 +136,10 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
     private void setUpMap(GoogleMap googleMap) {
 
-        googleMap.getUiSettings().setMapToolbarEnabled(true);
+        //googleMap.getUiSettings().setMapToolbarEnabled(true);
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
-
+        //googleMap.getUiSettings().setZoomControlsEnabled(true);
+        googleMap.setOnInfoWindowClickListener(this);
 
         //permissionRequest();
         LatLng ROMA = new LatLng(41.9000, 12.5000);
@@ -143,41 +149,22 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                 .bearing(0)                // Sets the orientation of the camera to east
                 .build();                   // Creates a CameraPosition from the builder
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-        LatLng Marker1 = new LatLng(41.9000, 12.5000);
+        googleMap.setPadding(0,180,0,0);
+        LatLng Marker1 = new LatLng(41.9000, 12.6000);
         LatLng Marker2 = new LatLng(41.8000, 12.5000);
         LatLng Marker3 = new LatLng(41.9000, 12.4000);
         googleMap.addMarker(new MarkerOptions().position(Marker1)
-                .title("Marker1")).showInfoWindow();
+                .title("Marker1"));
         googleMap.addMarker(new MarkerOptions().position(Marker2)
-                .title("Marker2")).showInfoWindow();
-        googleMap.addMarker(new MarkerOptions().position(Marker2)
-                .title("Marker2")).showInfoWindow();
+                .title("Marker2"));
+        googleMap.addMarker(new MarkerOptions().position(Marker3)
+                .title("Marker3"));
         //Firebasecode
-
-         database = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference ref = database.child("pin").child("pins");
-        Query query1= ref.equalTo("1");
-
-        query1.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
-                    Object o = singleSnapshot.getValue(Objects.class);
-                    Log.d(TAG, o.toString());
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAG, "onCancelled", databaseError.toException());
-            }
-        });
-
-
-        /*
-         final List<Pin> pins=new ArrayList<Pin>();
+        database = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference ref = database;
+        final List<Pin> pins=new ArrayList<Pin>();
         Log.d(TAG, String.valueOf(pins.size()));
-         Query query= ref;
+        Query query= ref.child("pin").child("pins");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
 
 
@@ -187,13 +174,15 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                 for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
                     pins.add(singleSnapshot.getValue(Pin.class));
                     Log.d(TAG,"new Pin added");
+                    Log.d(TAG, String.valueOf(pins.size()));
                 }
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e(TAG, "onCancelled", databaseError.toException());
             }
-        });*/
+        });
 
 
 
@@ -201,15 +190,23 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
     @Override
     public void onInfoWindowClick(Marker marker) {
+        /*Log.d(TAG, "Infowindow clicked");
+        final Fragment fragment= new PinFragment();
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+        */
+        Intent intent = new Intent(this.getActivity(), PinActivity.class);
+        startActivity(intent);
 
     }
 
     /*@Override
     public void onInfoWindowClick(Marker marker) {
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.content_frame, fragment);
-        fragmentTransaction.addToBackStack(null);
+
     }*/
 
 
@@ -228,6 +225,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
     private void setUpMapIfNeeded() {
         if (googleMap == null) {
+            Log.d(TAG, "SetupMapIfNeededCalled");
             getMapAsync(new OnMapReadyCallback() {
                 @Override
                 public void onMapReady(GoogleMap gMap) {

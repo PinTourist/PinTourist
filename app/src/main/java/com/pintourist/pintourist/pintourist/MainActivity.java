@@ -82,10 +82,10 @@ public class MainActivity extends AppCompatActivity
         AHBottomNavigation bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
 
 // Create items
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem("Ciao", R.drawable.ic_menu_share, R.color.colorPrimary);
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem("Maps", R.drawable.ic_menu_share, R.color.colorPrimary);
 
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem("Ciao", R.drawable.ic_menu_share, R.color.colorPrimary);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem("Ciao", R.drawable.ic_menu_share, R.color.colorPrimary);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem("Leaderboard", R.drawable.ic_menu_share, R.color.colorPrimary);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem("Profile", R.drawable.ic_menu_share, R.color.colorPrimary);
 
 
         // Disable the translation inside the CoordinatorLayout
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity
         // Enable the translation of the FloatingActionButton
         bottomNavigation.manageFloatingActionButtonBehavior(fab);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        */
 
     }
 
