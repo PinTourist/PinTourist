@@ -129,7 +129,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
     }
 
-    private void setUpMap(GoogleMap googleMap) {
+    private void setUpMap(final GoogleMap googleMap) {
 
         //googleMap.getUiSettings().setMapToolbarEnabled(true);
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
@@ -147,7 +147,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         googleMap.setPadding(0,180,0,0);
         LatLng Marker1 = new LatLng(41.9000, 12.6000);
         LatLng Marker2 = new LatLng(41.8000, 12.5000);
-        LatLng Marker3 = new LatLng(41.9000, 12.4000);
+        final LatLng Marker3 = new LatLng(41.9000, 12.4000);
         googleMap.addMarker(new MarkerOptions().position(Marker1)
                 .title("Marker1"));
         googleMap.addMarker(new MarkerOptions().position(Marker2)
@@ -172,7 +172,10 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                     Log.d(TAG, String.valueOf(pins.size()));
                     Pin pin=singleSnapshot.getValue(Pin.class);
 
-                    Log.d(TAG, String.valueOf(pin.getLat()));
+                    Log.d(TAG, String.valueOf(pin.getLatLng()));
+                    LatLng position= pin.getLatLng();
+                    googleMap.addMarker(new MarkerOptions().position(pin.getLatLng())
+                            .title(pin.getName()));
 
                     //LatLng MarkerTemp = new LatLng(singleSnapshot.getValue());
                 }

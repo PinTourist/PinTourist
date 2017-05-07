@@ -1,5 +1,7 @@
 package com.pintourist.pintourist.pintourist.Object;
 
+import android.util.Log;
+
 import com.google.android.gms.maps.model.LatLng;
 
 /**
@@ -17,24 +19,31 @@ public class Pin {
         return this.Comment;
     }
     private double Lat=0;
-    private double Lng;
+    private double Lng=0;
 
     private LatLng LatLng ;
 
     public LatLng getLatLng() {
-       return LatLng;
+       return new LatLng(Lat,Lng);
 
     }
     public double getLat(){
         return this.Lat;
     }
+    public double getLng(){
+        return this.Lng;
+    }
     public Pin(){
 
-
+        //just to be here
     }
-    public Pin(double Lat, double Lng){
+
+    public Pin(double Lat, double Lng, String Name){
         this.Lat=Lat;
         this.Lng=Lng;
-        this.LatLng = new LatLng(Lat,Lng);
+        this.Name=Name;
+
+
+
     }
 }
