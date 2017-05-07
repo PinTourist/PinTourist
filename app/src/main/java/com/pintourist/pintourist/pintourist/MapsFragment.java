@@ -8,13 +8,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,14 +26,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.pintourist.pintourist.pintourist.Object.Pin;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-import static android.content.ContentValues.TAG;
 
 
 /**
@@ -175,6 +170,11 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                     pins.add(singleSnapshot.getValue(Pin.class));
                     Log.d(TAG,"new Pin added");
                     Log.d(TAG, String.valueOf(pins.size()));
+                    Pin pin=singleSnapshot.getValue(Pin.class);
+
+                    Log.d(TAG, String.valueOf(pin.getLat()));
+
+                    //LatLng MarkerTemp = new LatLng(singleSnapshot.getValue());
                 }
 
             }
@@ -219,7 +219,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     public void onResume() {
         super.onResume();
 
-        setUpMapIfNeeded();
+       // setUpMapIfNeeded();
 
     }
 
