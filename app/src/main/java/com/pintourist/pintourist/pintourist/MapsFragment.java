@@ -155,7 +155,11 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         googleMap.addMarker(new MarkerOptions().position(Marker3)
                 .title("Marker3"));
         //Firebasecode
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        //offline capabilities
         database = FirebaseDatabase.getInstance().getReference();
+
+
         DatabaseReference ref = database;
         final List<Pin> pins=new ArrayList<Pin>();
         Log.d(TAG, String.valueOf(pins.size()));
@@ -202,15 +206,16 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
         */
+
         Intent intent = new Intent(this.getActivity(), PinActivity.class);
+        LatLng position= marker.getPosition();
+        intent.putExtra("Lat", position.latitude);
+        intent.putExtra("Lng", position.longitude);
         startActivity(intent);
 
     }
 
-    /*@Override
-    public void onInfoWindowClick(Marker marker) {
 
-    }*/
 
 
     public interface OnFragmentInteractionListener {
