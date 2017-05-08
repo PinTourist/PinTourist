@@ -162,6 +162,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
         DatabaseReference ref = database;
         final List<Pin> pins=new ArrayList<Pin>();
+
         Log.d(TAG, String.valueOf(pins.size()));
         Query query= ref.child("pin").child("pins");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -171,6 +172,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.d(TAG, String.valueOf(pins.size()));
                 for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
+
                     pins.add(singleSnapshot.getValue(Pin.class));
                     Log.d(TAG,"new Pin added");
                     Log.d(TAG, String.valueOf(pins.size()));

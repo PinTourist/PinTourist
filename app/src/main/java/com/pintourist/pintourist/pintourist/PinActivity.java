@@ -1,6 +1,7 @@
 package com.pintourist.pintourist.pintourist;
 
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,6 +16,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.pintourist.pintourist.pintourist.Object.Pin;
+
+import java.util.ArrayList;
 
 public class PinActivity extends AppCompatActivity {
 
@@ -28,24 +29,65 @@ public class PinActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_pin);
+        setSupportActionBar(toolbar);
+
+
+        if (getSupportActionBar() != null) {
+
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+        final CollapsingToolbarLayout collapsingToolbarLayout =
+                (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+
+        //collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.transparent));
+
+
+
         //creation
 
+        //things of activity
+
+
+
         //get extras
-        double Lat =(double) getIntent().getExtras().get("Lat");
-        double Lng= (double) getIntent().getExtras().get("Lng");
+        final double Lat =(double) getIntent().getExtras().get("Lat");
+        final double Lng= (double) getIntent().getExtras().get("Lng");
         Log.d(TAG, "Lat:"+Lat+"  Lng:"+Lng);
         //get Info from DB
         database = FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref = database;
+        final ArrayList<Pin> pins = new ArrayList<Pin>();
 
         Query query= ref.child("pin").child("pins");
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        query.orderByChild("Lat").equalTo(Lat).addListenerForSingleValueEvent(new ValueEventListener() {
 
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-               Pin pin= dataSnapshot.getValue(Pin.class);
+                if(dataSnapshot.exists()){
+                    for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
+                        // Pin pin= dataSnapshot.getValue(Pin.class);
+                        pins.add(singleSnapshot.getValue(Pin.class));
+                        pin=pins.get(0);
+                        //if (Lat==pin.getLat() && Lng==pin.getLng()){
+
+                        //pin.getName();
+                        //getSupportActionBar().setTitle(pin.getName());
+                        collapsingToolbarLayout.setTitle(pin.getName());
+                            Log.d(TAG, "Pin with " + pin.getName()+ " found");
+                            break;
+                        //}
+
+
+                    }
+                }
+                else {
+                    Log.d(TAG,"The pin with Lat "+Lat+" doesn't exists");
+                }
+
             }
 
             @Override
@@ -65,7 +107,7 @@ public class PinActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Pin");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_pin);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
