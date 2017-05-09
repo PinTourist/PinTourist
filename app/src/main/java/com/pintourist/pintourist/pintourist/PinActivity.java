@@ -4,11 +4,15 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -16,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.pintourist.pintourist.pintourist.Object.Pin;
+import com.pintourist.pintourist.pintourist.Object.Question;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,23 +32,24 @@ public class PinActivity extends AppCompatActivity {
     private String TAG= "Pin Activity";
     private DatabaseReference database;
     private Pin pin;
+    private List<Question> questionList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin);
+        //things of activity
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_pin);
         setSupportActionBar(toolbar);
-
-
         if (getSupportActionBar() != null) {
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-
         final CollapsingToolbarLayout collapsingToolbarLayout =
                 (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+
+        final TextView description= (TextView) findViewById(R.id.text_pin);
 
         //collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.transparent));
 
@@ -51,7 +57,7 @@ public class PinActivity extends AppCompatActivity {
 
         //creation
 
-        //things of activity
+
 
 
 
@@ -82,7 +88,9 @@ public class PinActivity extends AppCompatActivity {
                         //pin.getName();
                         //getSupportActionBar().setTitle(pin.getName());
                         collapsingToolbarLayout.setTitle(pin.getName());
+                        description.setText(pin.getComment());
                         Log.d(TAG, "Pin with " + pin.getName()+ " found");
+                        questionList=pin.getQuestionList();
 
                         //Log.d(TAG, "Question 1 of pin" + pin.getQuestions().getClass()+ " found");
                         //    break;
@@ -113,13 +121,27 @@ public class PinActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Pin");
+        DialogFragment newFragment = new PinDialogFragment();
+        newFragment.show(getSupportFragmentManager(), "missiles");
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_pin);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+
+
+
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG.setAction("Action", null).show();
+                if(questionList!=null) {
+                   /* new MaterialDialog.Builder(view.getContext())
+                            .title("Answer in the right way to conquest the pin")
+                            .content(questionList.get(0).getQ())
+                            .show();*/
+                }
+
             }
         });
 

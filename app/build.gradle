@@ -47,6 +47,8 @@ dependencies {
     compile 'com.aurelhubert:ahbottomnavigation:2.0.6'
     compile 'com.google.android.gms:play-services-maps:10.2.1'
     //compile 'me.zhanghai.android.materialprogressbar:library:1.1.5'
+    compile 'com.afollestad.material-dialogs:core:0.9.4.4'
+    //dialogs
 
     compile 'com.google.android.gms:play-services-auth:10.2.1'
     compile 'me.zhanghai.android.materialprogressbar:library:1.1.5'
