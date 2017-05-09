@@ -1,9 +1,11 @@
 package com.pintourist.pintourist.pintourist.Object;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 /**
  * Created by fedebyes on 09/05/17.
  */
-
+@IgnoreExtraProperties
 public class Question {
 
      private String Q="";

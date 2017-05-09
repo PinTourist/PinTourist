@@ -79,8 +79,8 @@ public class PinActivity extends AppCompatActivity {
 
                         //pin.getName();
                         //getSupportActionBar().setTitle(pin.getName());
-                        collapsingToolbarLayout.setTitle(pin.getName());
-                        Log.d(TAG, "Pin with " + pin.getName()+ " found");
+                        collapsingToolbarLayout.setTitle(pin.name);
+                        Log.d(TAG, "Pin with " + pin.name+ " found");
 
                         //Log.d(TAG, "Question 1 of pin" + pin.getQuestions().getClass()+ " found");
                         //    break;

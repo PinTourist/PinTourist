@@ -148,40 +148,47 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         LatLng Marker1 = new LatLng(41.9000, 12.6000);
         LatLng Marker2 = new LatLng(41.8000, 12.5000);
         final LatLng Marker3 = new LatLng(41.9000, 12.4000);
-        googleMap.addMarker(new MarkerOptions().position(Marker1)
+        /*googleMap.addMarker(new MarkerOptions().position(Marker1)
                 .title("Marker1"));
         googleMap.addMarker(new MarkerOptions().position(Marker2)
                 .title("Marker2"));
         googleMap.addMarker(new MarkerOptions().position(Marker3)
                 .title("Marker3"));
+                */
         //Firebasecode
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         //offline capabilities
         database = FirebaseDatabase.getInstance().getReference();
 
 
-        DatabaseReference ref = database;
+        final DatabaseReference ref = database;
         final List<Pin> pins=new ArrayList<Pin>();
 
-        Log.d(TAG, String.valueOf(pins.size()));
-        Query query= ref.child("pin").child("pins");
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+
+        Query query= ref.child("pins");
+        query.addValueEventListener(new ValueEventListener() {
 
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d(TAG, String.valueOf(pins.size()));
+                Log.d(TAG, String.valueOf(dataSnapshot.getChildrenCount()));
+
                 for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
 
-                    pins.add(singleSnapshot.getValue(Pin.class));
-                    Log.d(TAG,"new Pin added");
-                    Log.d(TAG, String.valueOf(pins.size()));
-                    Pin pin=singleSnapshot.getValue(Pin.class);
 
-                    Log.d(TAG, String.valueOf(pin.getLatLng()));
+                    //Log.d(TAG,"new Pin added");
+                    Log.d(TAG, String.valueOf(pins.size()));
+
+                    Pin pin=singleSnapshot.getValue(Pin.class);
+                    pins.add(pin);
+                    Log.d(TAG, String.valueOf(pin.getLat()));
+                    Log.d(TAG, "nome: "+ pin.name);
+
                     LatLng position= pin.getLatLng();
                     googleMap.addMarker(new MarkerOptions().position(pin.getLatLng())
-                            .title(pin.getName()));
+                            .title(pin.name));
+
+
 
                     //LatLng MarkerTemp = new LatLng(singleSnapshot.getValue());
 
@@ -206,6 +213,24 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                 Log.e(TAG, "onCancelled", databaseError.toException());
             }
         });
+        /*
+        Try query
+        Query query1=ref.child("ciao");
+        query1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    Pin pin=dataSnapshot.getValue(Pin.class);
+                    Log.d(TAG, "nomeciao"+pin.name);
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
 
 
 

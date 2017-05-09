@@ -3,6 +3,7 @@ package com.pintourist.pintourist.pintourist.Object;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,8 +16,8 @@ import java.util.Map;
 
 public class Pin {
 
-   private String Name="";
-   private String Comment="";
+   public String name;
+   private String comment;
     private Question q=new Question();
     private List<Question> questionList=new ArrayList<Question>(){
         {
@@ -30,8 +31,8 @@ public class Pin {
     };*/
 
     private int id=0;
-    private double Lat=0;
-    private double Lng=0;
+    private double lat=0;
+    private double lng=0;
 
     private LatLng LatLng ;
 
@@ -41,11 +42,11 @@ public class Pin {
         //just to be here
     }
 
-    public Pin(double Lat, double Lng, String Name, String Comment, List<Question> questionList){
-        this.Lat=Lat;
-        this.Lng=Lng;
-        this.Name=Name;
-        this.Comment=Comment;
+    public Pin(double lat, double lng, String name, String comment, List<Question> questionList){
+        this.lat=lat;
+        this.lng=lng;
+        this.name=name;
+        this.comment=comment;
         //this.question= (HashMap)  question;
         this.questionList=questionList;
 
@@ -54,20 +55,20 @@ public class Pin {
 
     }
     public LatLng getLatLng() {
-        return new LatLng(Lat,Lng);
+        return new LatLng(lat,lng);
 
     }
     public double getLat(){
-        return this.Lat;
+        return this.lat;
     }
     public double getLng(){
-        return this.Lng;
+        return this.lng;
     }
-    public String getName(){
+    /*public String getName(){
         return this.Name;
-    }
+    }*/
     public String getComment(){
-        return this.Comment;
+        return this.comment;
     }
     public List<Question> getQuestionList(){return this.questionList;}
     //public HashMap getQuestionsList(){return (HashMap) question;}
