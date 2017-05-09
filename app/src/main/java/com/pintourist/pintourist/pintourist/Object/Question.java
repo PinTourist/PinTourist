@@ -8,26 +8,26 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class Question {
 
-     private String Q="";
-    private String A1="";
-    private String A2="";
-    private String A3="";
-    private String A4="";
+     private String q="";
+    private String a1="";
+    private String a2="";
+    private String a3="";
+    private String a4="";
 
     public Question(){
 
     }
-    public Question(String Q,String A1,String A2,String A3,String A4){
-        this.Q=Q;
-        this.A1=A1;
-        this.A2=A2;
-        this.A3=A3;
-        this.A4=A4;
+    public Question(String q,String a1,String a2,String a3,String a4){
+        this.q=q;
+        this.a1=a1;
+        this.a2=a2;
+        this.a3=a3;
+        this.a4=a4;
     }
-    public String getQ(){return  Q;}
-    public String getA1(){return  A1;}
-    public String getA2(){return  A2;}
-    public String getA3(){return  A3;}
-    public String getA4(){return  A4;}
+    public String getQ(){return  q;}
+    public String getA1(){return  a1;}
+    public String getA2(){return  a2;}
+    public String getA3(){return  a3;}
+    public String getA4(){return  a4;}
 
 }

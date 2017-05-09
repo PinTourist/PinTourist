@@ -9,20 +9,24 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:background="?attr/colorPrimary"
-        android:orientation="horizontal"></FrameLayout>
-
-    <TextView
-        android:id="@+id/dialog_title"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:paddingBottom="16dp"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        tools:text="Title" />
+        android:background="?attr/colorPrimary"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:paddingBottom="16dp"
+            android:text="TextView"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            tools:text="Title" />
+    </FrameLayout>
+
+
 
     <TextView
         android:id="@+id/dialog_body"
@@ -50,16 +54,18 @@
 
             <Button
                 android:id="@+id/dialog_button1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.39"
+
                 android:text="Button" />
 
             <Button
                 android:id="@+id/dialog_button2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.39"
+
                 android:text="Button" />
         </LinearLayout>
 
@@ -71,14 +77,15 @@
 
             <Button
                 android:id="@+id/dialog_button3"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+
                 android:text="Button" />
 
             <Button
                 android:id="@+id/dialog_button4"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Button" />

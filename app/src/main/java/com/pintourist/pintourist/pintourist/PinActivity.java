@@ -34,6 +34,8 @@ public class PinActivity extends AppCompatActivity {
     private Pin pin;
     private List<Question> questionList;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,8 +123,7 @@ public class PinActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Pin");
-        DialogFragment newFragment = new PinDialogFragment();
-        newFragment.show(getSupportFragmentManager(), "missiles");
+
 
 
 
@@ -136,6 +137,8 @@ public class PinActivity extends AppCompatActivity {
 
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG.setAction("Action", null).show();
                 if(questionList!=null) {
+                    DialogFragment newFragment = new PinDialogFragment().newInstance(pin.getName());
+                    newFragment.show(getSupportFragmentManager(), "Dialog TAG");
                    /* new MaterialDialog.Builder(view.getContext())
                             .title("Answer in the right way to conquest the pin")
                             .content(questionList.get(0).getQ())
