@@ -22,7 +22,9 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, MapsFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        MapsFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener,
+        LeaderboardFragment.OnFragmentInteractionListener{
 
 
     private String TAG = " MainActiviry";
@@ -35,10 +37,10 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().getThemedContext();
         toolbar.setTitleTextColor(0xFFFFFFFF);
-        final Fragment fragment= new MapsFragment();
+        final Fragment[] fragment = {new MapsFragment(), new ProfileFragment(), new LeaderboardFragment()};
         final FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
+                .replace(R.id.container, fragment[0])
                 .commit();
 
         //Firebasecode
@@ -80,8 +82,8 @@ public class MainActivity extends AppCompatActivity
 // Create items
         AHBottomNavigationItem item1 = new AHBottomNavigationItem("Maps", R.drawable.ic_menu_share, R.color.colorPrimary);
 
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem("Leaderboard", R.drawable.ic_menu_share, R.color.colorPrimary);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem("Profile", R.drawable.ic_menu_share, R.color.colorPrimary);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem("Leaderboard", R.drawable.ic_menu_share, R.color.colorPrimary);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem("Profile", R.drawable.ic_menu_share, R.color.colorPrimary);
 
 
         // Disable the translation inside the CoordinatorLayout
@@ -97,8 +99,8 @@ public class MainActivity extends AppCompatActivity
         //bottomNavigation.setColored(true);
         // Add items
         bottomNavigation.addItem(item1);
-        //bottomNavigation.addItem(item2);
-        //bottomNavigation.addItem(item3);
+        bottomNavigation.addItem(item2);
+        bottomNavigation.addItem(item3);
         bottomNavigation.setCurrentItem(0);
 
         // Set listeners
@@ -114,10 +116,19 @@ public class MainActivity extends AppCompatActivity
 
 
                         fragmentManager.beginTransaction()
-                                .replace(R.id.container, fragment)
+                                .replace(R.id.container, fragment[0])
                                 .commit();
 
+                    case 1:
 
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.container, fragment[1])
+                                .commit();
+
+                    case 2:
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.container, fragment[2])
+                                .commit();
 
 
                 }

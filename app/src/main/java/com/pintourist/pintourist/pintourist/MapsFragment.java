@@ -161,7 +161,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                 .title("Marker3"));
                 */
         //Firebasecode
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+       // FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         //offline capabilities
         database = FirebaseDatabase.getInstance().getReference();
 
@@ -273,7 +273,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     public void onResume() {
         super.onResume();
 
-       // setUpMapIfNeeded();
+       setUpMapIfNeeded();
 
     }
 
