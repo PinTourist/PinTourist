@@ -162,7 +162,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
 
         final DatabaseReference ref = database;
-        final List<Pin> pins=new ArrayList<Pin>();
+
 
 
         Query query= ref.child("pins");
@@ -172,7 +172,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.d(TAG, String.valueOf(dataSnapshot.getChildrenCount()));
-
+                final List<Pin> pins=new ArrayList<Pin>();
                 for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
 
 
@@ -182,11 +182,11 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                     Pin pin=singleSnapshot.getValue(Pin.class);
                     pins.add(pin);
                     Log.d(TAG, String.valueOf(pin.getLat()));
-                    Log.d(TAG, "nome: "+ pin.name);
+                    Log.d(TAG, "nome: "+ pin.getName());
 
                     LatLng position= pin.getLatLng();
                     googleMap.addMarker(new MarkerOptions().position(pin.getLatLng())
-                            .title(pin.name));
+                            .title(pin.getName()));
 
 
 

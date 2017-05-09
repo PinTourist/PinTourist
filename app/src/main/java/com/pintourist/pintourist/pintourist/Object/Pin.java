@@ -13,10 +13,10 @@ import java.util.Map;
 /**
  * Created by fedebyes on 27/04/17.
  */
-
+@IgnoreExtraProperties
 public class Pin {
 
-   public String name;
+   private String name;
    private String comment;
     private Question q=new Question();
     private List<Question> questionList=new ArrayList<Question>(){
@@ -64,9 +64,9 @@ public class Pin {
     public double getLng(){
         return this.lng;
     }
-    /*public String getName(){
-        return this.Name;
-    }*/
+    public String getName(){
+        return this.name;
+    }
     public String getComment(){
         return this.comment;
     }

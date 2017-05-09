@@ -62,15 +62,17 @@ public class PinActivity extends AppCompatActivity {
         //get Info from DB
         database = FirebaseDatabase.getInstance().getReference();
         final DatabaseReference ref = database;
-        final ArrayList<Pin> pins = new ArrayList<Pin>();
 
-        Query query= ref.child("pin").child("pins");
-        query.orderByChild("Lat").equalTo(Lat).addListenerForSingleValueEvent(new ValueEventListener() {
+
+        Query query= ref.child("pins");
+        query.orderByChild("lat").equalTo(Lat).addValueEventListener(new ValueEventListener() {
 
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d(TAG,"number of found pins"+dataSnapshot.getChildrenCount());
                 if(dataSnapshot.exists()){
+                    final ArrayList<Pin> pins = new ArrayList<Pin>();
                     for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                         // Pin pin= dataSnapshot.getValue(Pin.class);
                         pins.add(singleSnapshot.getValue(Pin.class));
@@ -79,8 +81,8 @@ public class PinActivity extends AppCompatActivity {
 
                         //pin.getName();
                         //getSupportActionBar().setTitle(pin.getName());
-                        collapsingToolbarLayout.setTitle(pin.name);
-                        Log.d(TAG, "Pin with " + pin.name+ " found");
+                        collapsingToolbarLayout.setTitle(pin.getName());
+                        Log.d(TAG, "Pin with " + pin.getName()+ " found");
 
                         //Log.d(TAG, "Question 1 of pin" + pin.getQuestions().getClass()+ " found");
                         //    break;
