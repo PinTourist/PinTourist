@@ -56,14 +56,19 @@
                 android:id="@+id/dialog_button1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:theme="@style/PinButtonTheme"
                 android:layout_weight="0.39"
+                android:textAllCaps="false"
 
                 android:text="Button" />
 
             <Button
                 android:id="@+id/dialog_button2"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:theme="@style/PinButtonTheme"
+                android:textAllCaps="false"
                 android:layout_weight="0.39"
 
                 android:text="Button" />
@@ -73,12 +78,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+
             android:padding="16dp">
 
             <Button
                 android:id="@+id/dialog_button3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:theme="@style/PinButtonTheme"
+                android:textAllCaps="false"
                 android:layout_weight="1"
 
                 android:text="Button" />
@@ -87,6 +95,8 @@
                 android:id="@+id/dialog_button4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:theme="@style/PinButtonTheme"
+                android:textAllCaps="false"
                 android:layout_weight="1"
                 android:text="Button" />
         </LinearLayout>

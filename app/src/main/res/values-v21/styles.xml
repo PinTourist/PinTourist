@@ -20,7 +20,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">?attr/colorPrimaryDark</item>
+        <item name="colorAccent">?attr/colorPrimary</item>
         <item name="android:navigationBarColor">?attr/colorPrimary</item>
         <item name="android:colorForeground">?android:attr/colorForeground</item>
         <item name="android:colorBackground">@color/cardview_light_background</item>
