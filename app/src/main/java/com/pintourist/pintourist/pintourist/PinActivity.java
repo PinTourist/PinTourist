@@ -18,6 +18,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.pintourist.pintourist.pintourist.Object.Pin;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PinActivity extends AppCompatActivity {
 
@@ -29,7 +32,7 @@ public class PinActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_pin);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_pin);
         setSupportActionBar(toolbar);
 
 
@@ -58,7 +61,7 @@ public class PinActivity extends AppCompatActivity {
         Log.d(TAG, "Lat:"+Lat+"  Lng:"+Lng);
         //get Info from DB
         database = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference ref = database;
+        final DatabaseReference ref = database;
         final ArrayList<Pin> pins = new ArrayList<Pin>();
 
         Query query= ref.child("pin").child("pins");
@@ -77,8 +80,10 @@ public class PinActivity extends AppCompatActivity {
                         //pin.getName();
                         //getSupportActionBar().setTitle(pin.getName());
                         collapsingToolbarLayout.setTitle(pin.getName());
-                            Log.d(TAG, "Pin with " + pin.getName()+ " found");
-                            break;
+                        Log.d(TAG, "Pin with " + pin.getName()+ " found");
+
+                        //Log.d(TAG, "Question 1 of pin" + pin.getQuestions().getClass()+ " found");
+                        //    break;
                         //}
 
 

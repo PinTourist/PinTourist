@@ -6,7 +6,11 @@ package com.pintourist.pintourist.pintourist.Object;
 
 public class Question {
 
-     private String Q,A1,A2,A3,A4;
+     private String Q="";
+    private String A1="";
+    private String A2="";
+    private String A3="";
+    private String A4="";
 
     public Question(){
 

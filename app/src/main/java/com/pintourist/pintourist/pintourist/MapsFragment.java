@@ -184,6 +184,20 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                             .title(pin.getName()));
 
                     //LatLng MarkerTemp = new LatLng(singleSnapshot.getValue());
+
+                    //Code to create Pins
+                    /*
+                    Map<String,Pin> objectList=new HashMap<String,Pin>();
+                        int x;
+                        for(x=0;x<20;x++){
+                            objectList.put(String.valueOf(x),new Pin());
+
+                        }
+                        //objectList.put("0",new Pin());
+                        //ref.put("ciai");
+                        ref.child("pins").setValue(objectList);
+                        //ref.setValue(objectList);
+                     */
                 }
 
             }
