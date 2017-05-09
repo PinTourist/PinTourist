@@ -18,6 +18,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -140,9 +141,13 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         LatLng ROMA = new LatLng(41.9000, 12.5000);
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(ROMA)      // Sets the center of the map to mi position
-                .zoom(10)                   // Sets the zoom
+                .zoom(12)                  // Sets the zoom
                 .bearing(0)                // Sets the orientation of the camera to east
                 .build();                   // Creates a CameraPosition from the builder
+         //LatLngBounds ROMABOUND = new LatLngBounds(
+         //       new LatLng(41.990224, 12.4224935), new LatLng(41.8735886, 12.4224935));
+
+        //googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ROMA,12));
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         googleMap.setPadding(0,180,0,0);
         LatLng Marker1 = new LatLng(41.9000, 12.6000);
@@ -239,7 +244,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     @Override
     public void onInfoWindowClick(Marker marker) {
         /*Log.d(TAG, "Infowindow clicked");
-        final Fragment fragment= new PinFragment();
+        final Fragment fragment= new ProfileFragment();
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

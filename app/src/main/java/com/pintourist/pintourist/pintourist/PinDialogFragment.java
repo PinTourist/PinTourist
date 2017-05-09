@@ -29,12 +29,23 @@ import java.util.List;
  * Created by fedebyes on 09/05/17.
  */
 
-public class PinDialogFragment extends DialogFragment {
+public class PinDialogFragment extends DialogFragment implements View.OnClickListener{
     private View rootView;
     private String TAG="PinDialog";
     private Pin pin;
     private List<Question> questionList;
     private Question question;
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.dialog_button1:
+            case R.id.dialog_button2:
+            case R.id.dialog_button3:
+            case R.id.dialog_button4:
+
+        }
+    }
 
     public interface PinDialogListener{
         public void onDialogPositiveClick(DialogFragment dialog);
