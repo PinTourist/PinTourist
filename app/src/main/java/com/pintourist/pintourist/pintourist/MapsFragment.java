@@ -10,7 +10,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -55,6 +60,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     private String[] PERMISSIONS = new String[]{ ACCESS_FINE_LOCATION,
            ACCESS_COARSE_LOCATION};
     private View mapView ;
+    private static FrameLayout fragmentContainer;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -80,16 +86,25 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        setRetainInstance(true);
         getMapAsync(this);
 
 
 
     }
-
+    /*
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_maps, container, false);
+    }
+    */
 
 
 
@@ -148,7 +163,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
          //       new LatLng(41.990224, 12.4224935), new LatLng(41.8735886, 12.4224935));
 
         //googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ROMA,12));
-        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         googleMap.setPadding(0,180,0,0);
         LatLng Marker1 = new LatLng(41.9000, 12.6000);
         LatLng Marker2 = new LatLng(41.8000, 12.5000);
@@ -315,6 +330,30 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                 // app-defined int constant. The callback method gets the
                 // result of the request.
             }
+        }
+    }
+
+
+
+    /**
+     * Called when a fragment will be displayed
+
+    public void willBeDisplayed() {
+        // Do what you want here, for example animate the content
+
+        if (fragmentContainer != null) {
+            Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
+            fragmentContainer.startAnimation(fadeIn);
+        }
+    }*/
+
+    /**
+     * Called when a fragment will be hidden
+     */
+    public  void willBeHidden() {
+        if (fragmentContainer != null) {
+            Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_out);
+            fragmentContainer.startAnimation(fadeOut);
         }
     }
 }

@@ -66,6 +66,8 @@ public class PinDialogFragment extends DialogFragment implements View.OnClickLis
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         String PinName=getArguments().getString("PinName");
+        setRetainInstance(true);
+
         //Log.d(TAG,"PinName found: "+PinName);
         //Bundle args = new Bundle();
 

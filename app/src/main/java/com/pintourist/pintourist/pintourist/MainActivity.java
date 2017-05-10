@@ -18,8 +18,12 @@ import android.view.MenuItem;
 
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -28,6 +32,14 @@ public class MainActivity extends AppCompatActivity
 
 
     private String TAG = " MainActiviry";
+    private AHBottomNavigationViewPager viewPager;
+    private AHBottomNavigation bottomNavigation;
+    private MainViewPagerAdapter adapter;
+    private Fragment currentFragment;
+    //private DemoFragment currentFragment;
+    //private DemoViewPagerAdapter adapter;
+    private AHBottomNavigationAdapter navigationAdapter;
+    private ArrayList<AHBottomNavigationItem> bottomNavigationItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,55 +49,45 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().getThemedContext();
         toolbar.setTitleTextColor(0xFFFFFFFF);
-        final Fragment[] fragment = {new MapsFragment(), new ProfileFragment(), new LeaderboardFragment()};
+        /*final Fragment[] fragment = {new MapsFragment(), new ProfileFragment(), new LeaderboardFragment()};
         final FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment[0])
                 .commit();
-
+        */
         //Firebasecode
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         //DatabaseReference myRef = database.getReference("message");
 
         //myRef.setValue("Hello, World!");
+        bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
+        viewPager = (AHBottomNavigationViewPager) findViewById(R.id.view_pager);
 
 
-
-
-        /*
-        //BottomView
-        mBottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                selectFragment(item);
-                return true;
-            }
-        });
-
-
-        MenuItem selectedItem;
-        if (savedInstanceState != null) {
-            mSelectedItem = savedInstanceState.getInt(SELECTED_ITEM, 0);
-            selectedItem = mBottomNav.getMenu().findItem(mSelectedItem);
+        boolean useMenuResource=true;
+        if (useMenuResource) {
+            //tabColors = getApplicationContext().getResources().getIntArray(R.array.tab_colors);
+            navigationAdapter = new AHBottomNavigationAdapter(this, R.menu.bottom_navigation_main);
+            navigationAdapter.setupWithBottomNavigation(bottomNavigation);
         } else {
-            selectedItem = mBottomNav.getMenu().getItem(0);
+            AHBottomNavigationItem item1 = new AHBottomNavigationItem("Maps", R.drawable.ic_menu_share, R.color.colorPrimary);
+            AHBottomNavigationItem item3 = new AHBottomNavigationItem("Leaderboard", R.drawable.ic_menu_share, R.color.colorPrimary);
+            AHBottomNavigationItem item2 = new AHBottomNavigationItem("Profile", R.drawable.ic_menu_share, R.color.colorPrimary);
+            bottomNavigation.setCurrentItem(0);
+            bottomNavigationItems.add(item1);
+            bottomNavigationItems.add(item2);
+            bottomNavigationItems.add(item3);
+            bottomNavigation.addItems(bottomNavigationItems);
         }
-        selectFragment(selectedItem);
-        */
 
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction()
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                .show(new ProfileFragment())
+                .commit();
+        //bottomNavigation.setTranslucentNavigationEnabled(true);
         //Refer to https://github.com/aurelhubert/ahbottomnavigation
-
-        AHBottomNavigation bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
-
-// Create items
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem("Maps", R.drawable.ic_menu_share, R.color.colorPrimary);
-
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem("Leaderboard", R.drawable.ic_menu_share, R.color.colorPrimary);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem("Profile", R.drawable.ic_menu_share, R.color.colorPrimary);
-
-
         // Disable the translation inside the CoordinatorLayout
         //bottomNavigation.setBehaviorTranslationEnabled(false);
         // Change colors
@@ -96,23 +98,55 @@ public class MainActivity extends AppCompatActivity
         //bottomNavigation.setTranslucentNavigationEnabled(true);
         // Use colored navigation with circle reveal effect
         //bottomNavigation.setColored(true);
-        //bottomNavigation.setColored(true);
-        // Add items
-        bottomNavigation.addItem(item1);
-        bottomNavigation.addItem(item2);
-        bottomNavigation.addItem(item3);
-        bottomNavigation.setCurrentItem(0);
-
         // Set listeners
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override
             public boolean onTabSelected(int position, boolean wasSelected) {
-                Fragment frag = null;
+                //Fragment frag = null;
                 Log.d(TAG, "Selected " +
                         position);
+
+
+                if (currentFragment == null) {
+                    currentFragment = adapter.getCurrentFragment();
+                }
+
+                if (wasSelected) {
+                    //currentFragment.refresh();
+                    return true;
+                }
+
+                if (currentFragment != null) {
+                    //currentFragment.willBeHidden();
+                }
+
+                //currentFragment.willBeDisplayed();
+
+
+                //currentFragment.willBeDisplayed();
+                viewPager.setCurrentItem(position, false);
+                currentFragment = adapter.getCurrentFragment();
+
+
+
+
                 switch (position) {
                     case 0:
 
+                    case 1:
+
+                        //currentFragment.willBeHidden();
+                    case 2:
+
+                }
+
+                /*switch (position) {
+                    case 0:
+
+
+				viewPager.setCurrentItem(position, false);
+				currentFragment = adapter.getCurrentFragment();
+				currentFragment.willBeDisplayed();
 
 
                         fragmentManager.beginTransaction()
@@ -131,12 +165,20 @@ public class MainActivity extends AppCompatActivity
                                 .commit();
 
 
-                }
+                }*/
+
+
+
                 return true;
             }
-        }); 
+        });
 
+        viewPager.setOffscreenPageLimit(4);
 
+        adapter = new MainViewPagerAdapter(getSupportFragmentManager());
+        //adapter.setPrimaryItem(viewPager,1, new MapsFragment());
+        viewPager.setAdapter(adapter);
+        currentFragment = adapter.getCurrentFragment();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

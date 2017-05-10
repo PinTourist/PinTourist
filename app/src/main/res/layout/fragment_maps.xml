@@ -1,10 +1,19 @@
 
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
 
->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.pintourist.pintourist.pintourist.MapsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</FrameLayout>
+
 
 <!--
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,5 +27,5 @@ android:layout_height="match_parent"
 -->
 
 
-</fragment>
+
 
