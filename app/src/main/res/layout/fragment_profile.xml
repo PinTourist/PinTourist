@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="center"
-            android:src="@drawable/logo" />
+            android:src="@drawable/logo_small" />
 
         <ImageButton
             android:id="@+id/user_profile_photo"
