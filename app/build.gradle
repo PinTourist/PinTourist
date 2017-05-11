@@ -49,6 +49,7 @@ dependencies {
     //Firebase Depenendencies
     compile 'com.aurelhubert:ahbottomnavigation:2.0.6'
     compile 'com.google.android.gms:play-services-maps:10.2.4'
+    compile 'com.google.android.gms:play-services-games:10.2.4'
     compile 'com.afollestad.material-dialogs:core:0.9.4.4'
     compile 'com.google.android.gms:play-services-auth:10.2.4'
     compile 'me.zhanghai.android.materialprogressbar:library:1.1.5'
