@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
                 auth = FirebaseAuth.getInstance();
 
 
@@ -59,15 +59,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             //user is already signed in
             Log.d("AUTH", auth.getCurrentUser().getEmail());
 
-            run();
+            Toast.makeText(this,auth.getCurrentUser().getEmail(), Toast.LENGTH_LONG);
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }else{
-            startActivityForResult(AuthUI.getInstance()
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+            /*startActivityForResult(AuthUI.getInstance()
                     .createSignInIntentBuilder()
                     .setProviders(
                             AuthUI.FACEBOOK_PROVIDER,
                             AuthUI.EMAIL_PROVIDER,
                             AuthUI.GOOGLE_PROVIDER)
                     .build(),RC_SIGN_IN);
+                    */
         }
         findViewById(R.id.log_out_button).setOnClickListener(this);
 
