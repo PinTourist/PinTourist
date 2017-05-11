@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -20,6 +22,7 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar!=null){
             actionBar.hide();}
