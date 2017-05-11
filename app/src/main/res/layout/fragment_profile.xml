@@ -3,18 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <ImageView
             android:id="@+id/header_cover_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="center"
-            android:src="@drawable/logo_small" />
+            android:src="@drawable/logo" />
 
         <ImageButton
             android:id="@+id/user_profile_photo"
@@ -27,7 +25,7 @@
             android:elevation="5dp"
             android:padding="20dp"
             android:scaleType="centerCrop"></ImageButton>
-            //android:src="@drawable/profile" />
+        //android:src="@drawable/profile" />
 
         <RelativeLayout
             android:id="@+id/profile_layout"
@@ -38,22 +36,6 @@
             android:elevation="4dp"
             android:paddingBottom="24dp">
 
-        <com.pintourist.pintourist.pintourist.functions.RoundedImageView
-            android:id="@+id/user_photo"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@drawable/personavatar"
-            android:layout_gravity="center"
-            android:layout_margin="16dp"
-            />
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:gravity="center_vertical"
-            android:padding="@dimen/activity_horizontal_margin">
 
             <ImageView
                 android:id="@+id/add_friend"
@@ -62,7 +44,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_toLeftOf="@+id/drop_down_option_menu"></ImageView>
-                //android:src="@drawable/ic_action_user_add" />
+            //android:src="@drawable/ic_action_user_add" />
 
             <ImageView
                 android:id="@+id/drop_down_option_menu"
@@ -71,7 +53,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"></ImageView>
-                android:src="@drawable/ic_action_overflow" />
+            //android:src="@drawable/ic_action_overflow" />
 
             <TextView
                 android:id="@+id/user_profile_name"
@@ -113,18 +95,6 @@
                 android:elevation="4dp"
                 android:padding="20dp"
                 android:text="Friends" />
-                <View
-                    android:background="@color/gray"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:padding="@dimen/activity_horizontal_margin">
 
             <TextView
                 android:layout_width="fill_parent"
@@ -169,13 +139,11 @@
                 android:elevation="4dp"
                 android:padding="20dp"
                 android:text="" />
-        </RelativeLayout>
-
+        </LinearLayout>
         <Button
             android:id="@+id/button_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Logout" />
-        </LinearLayout>
     </RelativeLayout>
 </ScrollView>
