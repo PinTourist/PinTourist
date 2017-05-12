@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,19 +25,16 @@ import com.google.firebase.auth.FirebaseUser;
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment implements View.OnClickListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private FirebaseUser user ;
-
-
-    // TODO: Rename and change types of parameters
+    private FirebaseAuth auth;
     private String mParam1;
     private String mParam2;
-
     private OnFragmentInteractionListener mListener;
     private View rootView;
+    private String TAG= "Profile Fragment";
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -78,14 +77,21 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
        inflater = getActivity().getLayoutInflater();
         rootView = inflater.inflate(R.layout.fragment_profile,container,false);
         Button logout=(Button) rootView.findViewById(R.id.button_logout);
+        ImageView user_profile_photo= (ImageView) rootView.findViewById(R.id.user_profile_photo);
+
+
+
         logout.setOnClickListener(this);
-
-
+        auth = FirebaseAuth.getInstance();
+        user=auth.getCurrentUser();
+        //Log.d(TAG,user.getDisplayName());
         if (user != null) {
             // Name, email address, and profile photo Url
             String name = user.getDisplayName();
             String email = user.getEmail();
             Uri photoUrl = user.getPhotoUrl();
+
+            //Log.d(TAG,name+ " "+ email+ " "+ photoUrl);
 
             // Check if user's email is verified
             boolean emailVerified = user.isEmailVerified();
