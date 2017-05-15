@@ -2,7 +2,10 @@ package com.pintourist.pintourist.pintourist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,9 +14,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.pintourist.pintourist.pintourist.Object.Pin;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -35,6 +52,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private OnFragmentInteractionListener mListener;
     private View rootView;
     private String TAG= "Profile Fragment";
+    private DatabaseReference database;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -78,19 +96,26 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         rootView = inflater.inflate(R.layout.fragment_profile,container,false);
         Button logout=(Button) rootView.findViewById(R.id.button_logout);
         ImageView user_profile_photo= (ImageView) rootView.findViewById(R.id.user_profile_photo);
-
+        TextView user_profile_name= (TextView) rootView.findViewById(R.id.user_profile_name);
+        TextView user_profile_email= (TextView) rootView.findViewById(R.id.email_textview);
 
 
         logout.setOnClickListener(this);
         auth = FirebaseAuth.getInstance();
         user=auth.getCurrentUser();
+
         //Log.d(TAG,user.getDisplayName());
         if (user != null) {
             // Name, email address, and profile photo Url
+            checkUserScoreObject(user);
             String name = user.getDisplayName();
             String email = user.getEmail();
             Uri photoUrl = user.getPhotoUrl();
-
+            user_profile_name.setText(name);
+            user_profile_email.setText(email);
+            // show The Image in a ImageView
+            new DownloadImageTask((ImageView) rootView.findViewById(R.id.user_profile_photo))
+                    .execute(String.valueOf(photoUrl));
             //Log.d(TAG,name+ " "+ email+ " "+ photoUrl);
 
             // Check if user's email is verified
@@ -157,4 +182,88 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+
+
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
+
+
+    public void checkUserScoreObject(final FirebaseUser user){
+        database = FirebaseDatabase.getInstance().getReference();
+
+
+
+
+
+
+        Query query= database.child("userScore");
+        query.limitToFirst(1).addValueEventListener(new ValueEventListener() {
+
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d(TAG, String.valueOf(dataSnapshot.getChildrenCount()));
+                if(dataSnapshot.exists()==false){
+                    //creating userscore
+                    Log.d(TAG, "Creating Userscore for "+user.getDisplayName());
+
+                }
+                /*for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
+
+
+                    //Log.d(TAG,"new Pin added");
+                    Log.d(TAG, String.valueOf(pins.size()));
+
+                    Pin pin=singleSnapshot.getValue(Pin.class);
+
+                    //LatLng MarkerTemp = new LatLng(singleSnapshot.getValue());
+
+                    //Code to create Pins
+                    /*
+                    Map<String,Pin> objectList=new HashMap<String,Pin>();
+                        int x;
+                        for(x=0;x<20;x++){
+                            objectList.put(String.valueOf(x),new Pin());
+
+                        }
+                        //objectList.put("0",new Pin());
+                        //ref.put("ciai");
+                        ref.child("pins").setValue(objectList);
+                        //ref.setValue(objectList);
+
+                }*/
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled", databaseError.toException());
+            }
+        });
+    }
+
 }
