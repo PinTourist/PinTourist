@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,10 +30,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.pintourist.pintourist.pintourist.Object.Pin;
+import com.pintourist.pintourist.pintourist.Object.PinUser;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -98,6 +104,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         ImageView user_profile_photo= (ImageView) rootView.findViewById(R.id.user_profile_photo);
         TextView user_profile_name= (TextView) rootView.findViewById(R.id.user_profile_name);
         TextView user_profile_email= (TextView) rootView.findViewById(R.id.email_textview);
+        final TextView user_profile_points=(TextView) rootView.findViewById(R.id.point_textview);
 
 
         logout.setOnClickListener(this);
@@ -107,12 +114,33 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         //Log.d(TAG,user.getDisplayName());
         if (user != null) {
             // Name, email address, and profile photo Url
-            checkUserScoreObject(user);
+            checkPinUser(user);
             String name = user.getDisplayName();
             String email = user.getEmail();
             Uri photoUrl = user.getPhotoUrl();
             user_profile_name.setText(name);
             user_profile_email.setText(email);
+
+
+            database = FirebaseDatabase.getInstance().getReference();
+            Query query= database.child("pinUser").child(user.getUid());
+            Log.d(TAG, "Searching   " +user.getUid());
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    //Log.d(TAG, String.valueOf(dataSnapshot.getKey()));
+                    if(dataSnapshot.exists()){
+                        PinUser pinUser= dataSnapshot.getValue(PinUser.class);
+                        Log.d(TAG, "found"+ pinUser.userName);
+                        user_profile_points.setText(String.valueOf( pinUser.points));
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.e(TAG, "onCancelled", databaseError.toException());
+                }
+            });
+
             // show The Image in a ImageView
             new DownloadImageTask((ImageView) rootView.findViewById(R.id.user_profile_photo))
                     .execute(String.valueOf(photoUrl));
@@ -213,57 +241,54 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    public void checkUserScoreObject(final FirebaseUser user){
+    public void checkPinUser(final FirebaseUser user){
         database = FirebaseDatabase.getInstance().getReference();
+        /*HashMap<String, PinUser> map= new HashMap<>();
+        map.put("email", new PinUser());
+        database.child("pinUser").setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Log.d(TAG, "Created");
+            }
+        });*/
 
-
-
-
-
-
-        Query query= database.child("userScore");
-        query.limitToFirst(1).addValueEventListener(new ValueEventListener() {
-
-
+        Query query= database.child("pinUser");
+        query.limitToFirst(1).equalTo(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d(TAG, String.valueOf(dataSnapshot.getChildrenCount()));
-                if(dataSnapshot.exists()==false){
+
+                if(dataSnapshot.exists()){
+
                     //creating userscore
-                    Log.d(TAG, "Creating Userscore for "+user.getDisplayName());
-
+                    Log.d(TAG, "Creating PinUser of "+user.getDisplayName());
+                    PinUser pinUser= new PinUser(user.getDisplayName(),user.getEmail(),0);
+                    database.child("pinUser").child(user.getUid()).setValue(pinUser);
                 }
-                /*for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
+               }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled", databaseError.toException());
+            }
+        });
+    }
 
 
-                    //Log.d(TAG,"new Pin added");
-                    Log.d(TAG, String.valueOf(pins.size()));
-
-                    Pin pin=singleSnapshot.getValue(Pin.class);
-
-                    //LatLng MarkerTemp = new LatLng(singleSnapshot.getValue());
-
-                    //Code to create Pins
-                    /*
-                    Map<String,Pin> objectList=new HashMap<String,Pin>();
-                        int x;
-                        for(x=0;x<20;x++){
-                            objectList.put(String.valueOf(x),new Pin());
-
-                        }
-                        //objectList.put("0",new Pin());
-                        //ref.put("ciai");
-                        ref.child("pins").setValue(objectList);
-                        //ref.setValue(objectList);
-
-                }*/
-
+    public  PinUser  getPinUser(final FirebaseUser user){
+        final String TAG= "getPinUser()";
+        final DatabaseReference database;
+        database = FirebaseDatabase.getInstance().getReference();
+        Query query= database.child("pinUser");
+        query.limitToFirst(1).equalTo(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                PinUser pinUser= dataSnapshot.getValue(PinUser.class);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e(TAG, "onCancelled", databaseError.toException());
             }
         });
+        return null;
     }
 
 }

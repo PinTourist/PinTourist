@@ -11,15 +11,17 @@ import java.util.List;
 public class PinUser {
     public String userName;
     public String email;
-    public double points;
+    public int points;
     public List<Pin> conqueredPin;
+    public List<PinUser> friends;
 
     public PinUser(){
 
     }
-    public PinUser(String userName, String email){
+    public PinUser(String userName, String email, int points){
         this.userName=userName;
         this.email=email;
+        this.points=points;
     }
 
 
