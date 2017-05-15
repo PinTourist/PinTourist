@@ -31,6 +31,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.pintourist.pintourist.pintourist.Object.Pin;
 import com.pintourist.pintourist.pintourist.Object.PinUser;
+import com.pintourist.pintourist.pintourist.functions.utilities;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -113,6 +114,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
         //Log.d(TAG,user.getDisplayName());
         if (user != null) {
+
+            utilities.getGraphRequest(user);
             // Name, email address, and profile photo Url
             checkPinUser(user);
             String name = user.getDisplayName();
