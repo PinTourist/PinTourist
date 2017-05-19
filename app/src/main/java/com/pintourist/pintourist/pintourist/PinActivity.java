@@ -19,6 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.pintourist.pintourist.pintourist.Object.Pin;
 import com.pintourist.pintourist.pintourist.Object.Question;
 
@@ -33,7 +35,7 @@ public class PinActivity extends AppCompatActivity {
     private DatabaseReference database;
     private Pin pin;
     private List<Question> questionList;
-
+    private FirebaseStorage storage;
 
 
     @Override
@@ -69,6 +71,12 @@ public class PinActivity extends AppCompatActivity {
         Log.d(TAG, "Lat:"+Lat+"  Lng:"+Lng);
         //get Info from DB
         database = FirebaseDatabase.getInstance().getReference();
+        // Create a storage reference from our app
+        StorageReference storageRef = storage.getReference();
+        // Create a child reference
+        // imagesRef now points to "images"
+        StorageReference imagesRef = storageRef.child("monuments-photos");
+
         final DatabaseReference ref = database;
 
 

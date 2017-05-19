@@ -28,7 +28,6 @@
         <activity
             android:name=".SplashScreen"
             android:label="@string/app_name">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,7 +45,16 @@
         <activity
             android:name=".PinActivity"
             android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UploadPinActivity"
+            android:label="@string/title_activity_upload_pin"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pintourist.pintourist.pintourist.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
