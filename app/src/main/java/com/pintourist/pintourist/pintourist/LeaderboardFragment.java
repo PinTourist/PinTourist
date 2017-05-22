@@ -4,15 +4,24 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.pintourist.pintourist.pintourist.Object.PinUser;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 
 /**
@@ -23,7 +32,7 @@ import java.lang.reflect.Array;
  * Use the {@link LeaderboardFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LeaderboardFragment extends Fragment {
+public class LeaderboardFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -38,6 +47,8 @@ public class LeaderboardFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private OnFragmentInteractionListener mListener;
     private View rootView;
+    private String TAG="Leaderboard";
+    private SwipeRefreshLayout refresh;
 
     public LeaderboardFragment() {
         // Required empty public constructor
@@ -79,6 +90,8 @@ public class LeaderboardFragment extends Fragment {
         inflater = getActivity().getLayoutInflater();
       rootView = inflater.inflate(R.layout.fragment_leaderboard, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.my_recycler_view);
+        refresh= (SwipeRefreshLayout) rootView.findViewById(R.id.refresh);
+        refresh.setOnRefreshListener(this);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -89,12 +102,41 @@ public class LeaderboardFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        PinUser[] array= new PinUser[50];
+
+        ArrayList<PinUser> array= new ArrayList<>();
         mAdapter = new ScoreAdapter(array);
         mRecyclerView.setAdapter(mAdapter);
-
+        getData();
 
         return rootView;
+    }
+
+    private void getData() {
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        Query query= database.child("pinUser");
+        //Log.d(TAG, "Searching   " +user.getUid());
+        final ArrayList<PinUser> arrayL=new ArrayList<>();
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d(TAG, String.valueOf(dataSnapshot.getChildrenCount()));
+                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
+
+                    PinUser pinUser= singleSnapshot.getValue(PinUser.class);
+                    arrayL.add(pinUser);
+
+                }
+                mAdapter = new ScoreAdapter(arrayL);
+                mRecyclerView.setAdapter(mAdapter);
+
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled", databaseError.toException());
+            }
+        });
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -119,6 +161,11 @@ public class LeaderboardFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onRefresh() {
+        refresh.setRefreshing(false);
     }
 
     /**

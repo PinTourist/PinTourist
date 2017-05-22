@@ -1,6 +1,8 @@
 package com.pintourist.pintourist.pintourist;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,9 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,7 +42,7 @@ public class PinActivity extends AppCompatActivity {
     private DatabaseReference database;
     private Pin pin;
     private List<Question> questionList;
-    private FirebaseStorage storage;
+    private StorageReference storage;
 
 
     @Override
@@ -54,17 +61,7 @@ public class PinActivity extends AppCompatActivity {
                 (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
 
         final TextView description= (TextView) findViewById(R.id.text_pin);
-
-        //collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.transparent));
-
-
-
-        //creation
-
-
-
-
-
+        ImageView image_pin= (ImageView)     findViewById(R.id.image_pin);
         //get extras
         final double Lat =(double) getIntent().getExtras().get("Lat");
         final double Lng= (double) getIntent().getExtras().get("Lng");
@@ -72,11 +69,16 @@ public class PinActivity extends AppCompatActivity {
         //get Info from DB
         database = FirebaseDatabase.getInstance().getReference();
         // Create a storage reference from our app
-        StorageReference storageRef = storage.getReference();
+        //storage = FirebaseStorage.getInstance().getReference();
         // Create a child reference
         // imagesRef now points to "images"
-        StorageReference imagesRef = storageRef.child("monuments-photos");
-
+        /*StorageReference imagesRef = storage.child("monuments-photos/pantheon.jpg");
+        // Load the image using Glide
+        Glide.with(this )
+                .using(new FirebaseImageLoader())
+                .load(imagesRef)
+                .into(image_pin);
+*/
         final DatabaseReference ref = database;
 
 

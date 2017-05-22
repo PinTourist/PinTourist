@@ -27,32 +27,34 @@
             android:id="@+id/profile_image"
             android:src="@drawable/personavatar"
             android:layout_centerVertical="true"/>
+
         <LinearLayout
-            android:orientation="vertical"
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="left|center_vertical"
-            android:layout_toEndOf="@id/profile_image"
-            android:layout_toRightOf="@id/profile_image"
-            android:layout_marginStart="@dimen/fab_margin"
             android:layout_marginLeft="@dimen/fab_margin"
-            android:id="@+id/linearLayout2">
+            android:gravity="left|center_vertical"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/profile_image">
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:text="Nome"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="Nome" />
+                android:textSize="20sp" />
 
             <TextView
-                android:text="Specializzazione"
-                android:id="@+id/special"
+                android:id="@+id/score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark" />
+                android:text="10"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
