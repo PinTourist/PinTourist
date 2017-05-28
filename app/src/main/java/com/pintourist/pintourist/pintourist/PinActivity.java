@@ -1,13 +1,16 @@
 package com.pintourist.pintourist.pintourist;
 
+import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.TextViewCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -149,18 +152,26 @@ public class PinActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-
-
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG.setAction("Action", null).show();
-                if(questionList!=null) {
-                    DialogFragment newFragment = new PinDialogFragment().newInstance(pin.getName());
-                    newFragment.show(getSupportFragmentManager(), "Dialog TAG");
+                final ProgressDialog dialog = ProgressDialog.show(PinActivity.this, "",
+                        "Checking your position", true);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        dialog.dismiss();
+                        //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG.setAction("Action", null).show();
+                        if(questionList!=null) {
+                            DialogFragment newFragment = new PinDialogFragment().newInstance(pin.getName());
+                            newFragment.show(getSupportFragmentManager(), "Dialog TAG");
                    /* new MaterialDialog.Builder(view.getContext())
                             .title("Answer in the right way to conquest the pin")
                             .content(questionList.get(0).getQ())
                             .show();*/
-                }
+                        }
+                    }
+                }, 3000); // 3000 milliseconds delay
+
+
+
 
             }
         });
