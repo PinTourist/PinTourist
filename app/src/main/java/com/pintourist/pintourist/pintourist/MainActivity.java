@@ -71,9 +71,9 @@ public class MainActivity extends AppCompatActivity
             navigationAdapter = new AHBottomNavigationAdapter(this, R.menu.bottom_navigation_main);
             navigationAdapter.setupWithBottomNavigation(bottomNavigation);
         } else {
-            AHBottomNavigationItem item1 = new AHBottomNavigationItem("Maps", R.drawable.ic_menu_share, R.color.colorPrimary);
-            AHBottomNavigationItem item3 = new AHBottomNavigationItem("Leaderboard", R.drawable.ic_menu_share, R.color.colorPrimary);
-            AHBottomNavigationItem item2 = new AHBottomNavigationItem("Profile", R.drawable.ic_menu_share, R.color.colorPrimary);
+            AHBottomNavigationItem item1 = new AHBottomNavigationItem("Maps", R.drawable.ic_map_black_24dp, R.color.colorPrimary);
+            AHBottomNavigationItem item3 = new AHBottomNavigationItem("Leaderboard", R.drawable.ic_account_circle_black_24dp, R.color.colorPrimary);
+            AHBottomNavigationItem item2 = new AHBottomNavigationItem("Profile", R.drawable.ic_group_black_24dp, R.color.colorPrimary);
             bottomNavigation.setCurrentItem(0);
             bottomNavigationItems.add(item1);
             bottomNavigationItems.add(item2);

@@ -27,7 +27,8 @@
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginLeft="@dimen/fab_margin"
         android:layout_marginRight="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:tint="@android:color/white"
+        android:src="@drawable/ic_add_black_24dp" />
 
 
     <!--<android.support.design.widget.BottomNavigationView

@@ -106,7 +106,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:layout_marginRight="@dimen/activity_horizontal_margin"
-                            android:src="@drawable/ic_menu_share"
+                            android:src="@drawable/ic_email_black_24dp"
                             android:tint="@color/colorPrimaryDark"
                             android:visibility="visible" />
 
@@ -162,7 +162,7 @@
                             android:layout_marginRight="@dimen/activity_horizontal_margin"
                             android:tint="@color/colorPrimaryDark"
 
-                            android:src="@drawable/ic_menu_share"
+                            android:src="@drawable/ic_local_play_black_24dp"
                             android:visibility="visible" />
 
                         <TextView
@@ -203,19 +203,20 @@
                         android:layout_marginRight="16dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp" />
+                    <Button
+                        android:id="@+id/button_logout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Logout"
+                        />
 
 
                 </LinearLayout>
 
 
             </android.support.v7.widget.CardView>
-            <Button
-                android:id="@+id/button_logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Logout"
-                 />
+
         </LinearLayout>
 
     </RelativeLayout>
