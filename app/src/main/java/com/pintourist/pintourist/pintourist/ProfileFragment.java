@@ -262,6 +262,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
                 if(dataSnapshot.exists()){
 
+
+                }else{
                     //creating userscore
                     Log.d(TAG, "Creating PinUser of "+user.getDisplayName());
                     PinUser pinUser= new PinUser(user.getDisplayName(),user.getEmail(),0);
