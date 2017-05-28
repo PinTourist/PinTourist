@@ -61,7 +61,7 @@ public class PinActivity extends AppCompatActivity {
                 (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
 
         final TextView description= (TextView) findViewById(R.id.text_pin);
-        ImageView image_pin= (ImageView)     findViewById(R.id.image_pin);
+        final ImageView image_pin= (ImageView)     findViewById(R.id.image_pin);
         //get extras
         final double Lat =(double) getIntent().getExtras().get("Lat");
         final double Lng= (double) getIntent().getExtras().get("Lng");
@@ -69,16 +69,19 @@ public class PinActivity extends AppCompatActivity {
         //get Info from DB
         database = FirebaseDatabase.getInstance().getReference();
         // Create a storage reference from our app
-        //storage = FirebaseStorage.getInstance().getReference();
+
+        storage = FirebaseStorage.getInstance().getReference();
         // Create a child reference
         // imagesRef now points to "images"
-        /*StorageReference imagesRef = storage.child("monuments-photos/pantheon.jpg");
-        // Load the image using Glide
-        Glide.with(this )
-                .using(new FirebaseImageLoader())
-                .load(imagesRef)
-                .into(image_pin);
-*/
+        StorageReference imagesRef = storage.child("Rome-monuments and cool places/Arch_of_Constantine.jpg");
+        StorageReference httpsReference = FirebaseStorage.getInstance().getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/pintourist-163012.appspot.com/o/Rome-monuments%20and%20cool%20places%2FArch_of_Constantine.jpg?alt=media&token=d37363b3-7e7b-4694-85a7-a21be48f74cf");
+        final String imageS= "https://firebasestorage.googleapis.com/v0/b/pintourist-163012.appspot.com/o/Rome-monuments%20and%20cool%20places%2FArch_of_Constantine.jpg?alt=media&token=d37363b3-7e7b-4694-85a7-a21be48f74cf";
+        //Load the image using Glide
+
+
+        //Glide.with(this).load("http://goo.gl/gEgYUd").into(image_pin);
+
+
         final DatabaseReference ref = database;
 
 
@@ -103,6 +106,10 @@ public class PinActivity extends AppCompatActivity {
                         description.setText(pin.getComment());
                         Log.d(TAG, "Pin with " + pin.getName()+ " found");
                         questionList=pin.getQuestionList();
+                        Glide.with(getApplicationContext())
+
+                                .load(pin.getPicURL())
+                                .into(image_pin);
 
                         //Log.d(TAG, "Question 1 of pin" + pin.getQuestions().getClass()+ " found");
                         //    break;

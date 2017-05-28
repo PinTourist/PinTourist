@@ -19,6 +19,7 @@ public class Pin {
    private String name;
    private String comment;
     private Question q=new Question();
+    private String picURL;
     private List<Question> questionList=new ArrayList<Question>(){
         {
             add(q);
@@ -42,13 +43,14 @@ public class Pin {
         //just to be here
     }
 
-    public Pin(double lat, double lng, String name, String comment, List<Question> questionList){
+    public Pin(double lat, double lng, String name,String picURL, String comment, List<Question> questionList){
         this.lat=lat;
         this.lng=lng;
         this.name=name;
         this.comment=comment;
         //this.question= (HashMap)  question;
         this.questionList=questionList;
+        this.picURL=picURL;
 
 
 
@@ -57,6 +59,9 @@ public class Pin {
     public LatLng getLatLng() {
         return new LatLng(lat,lng);
 
+    }
+    public String getPicURL(){
+        return this.picURL;
     }
     public double getLat(){
         return this.lat;
