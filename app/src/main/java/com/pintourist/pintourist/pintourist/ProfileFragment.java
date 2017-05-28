@@ -256,7 +256,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         });*/
 
         Query query= database.child("pinUser");
-        query.limitToFirst(1).equalTo(user.getUid()).addValueEventListener(new ValueEventListener() {
+        query.limitToFirst(1).equalTo(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -265,9 +265,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
                 }else{
                     //creating userscore
-                    Log.d(TAG, "Creating PinUser of "+user.getDisplayName());
+                    /*Log.d(TAG, "Creating PinUser of "+user.getDisplayName());
                     PinUser pinUser= new PinUser(user.getDisplayName(),user.getEmail(),0);
                     database.child("pinUser").child(user.getUid()).setValue(pinUser);
+                    */
                 }
                }
             @Override
