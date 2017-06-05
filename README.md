@@ -35,11 +35,14 @@ Architecture
 
 Our app uses Google Play-Services Maps to generate the map. It uses Firebase for authetification to facebook and google along with Firebase Database to store all the information about the landmark pins including the pictures, description, location, and quiz questions that are associated with each pin. These can be updated through Firebase and also allow possiblity to add user provided content through Firebase. NFC chips were designated per pin which opens the pin dialogue shown in the screenshots below.   
 
-Promo
+Video
 -----------
 
-Here you can find a promotional video of the application:
-https://youtu.be/WftaeBChpjM
+Here you can find a video of the application: https://www.youtube.com/watch?v=ziXin6-1wGc
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ziXin6-1wGc/0.jpg)](https://www.youtube.com/watch?v=ziXin6-1wGc)
+
+
 
 Screenshot
 =
