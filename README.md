@@ -101,5 +101,5 @@ Informations about the course are available in the following page: http://ichatz
 
 * [First Milestone](http://www.slideshare.net/FedericoBacci/pin-tourist-0-74245888)
 * [Second Milestone](http://www.slideshare.net/FedericoBacci/pin-tourist-1-74245895)
-* [Third Milestone](https://www.slideshare.net/LouisMilia/pin-tourist-3)
+* [Third Milestone](https://www.slideshare.net/FedericoBacci/pin-tourist-final-presentation)
 
